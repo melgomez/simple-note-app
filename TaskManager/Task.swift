@@ -12,19 +12,5 @@ import RealmSwift
 class Task: Object {
     dynamic var title : String = ""
     dynamic var details : String = ""
-    dynamic var date : NSDate
-    
-    
-    init(title: String, details: String, date: NSDate) {
-        
-        self.title = title
-        self.details = details
-        self.date = date
-        
-        super.init()
-    }
-    
-    convenience required init() {
-        self.init()
-    }
+    dynamic var date : NSDate = NSDate()
 }
