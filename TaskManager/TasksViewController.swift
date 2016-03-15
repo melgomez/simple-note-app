@@ -7,12 +7,20 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TasksViewController: UITableViewController {
-
+    
+    let realm = try! Realm()
+    var tasks: Results<Task> {
+        get {
+            return realm.objects(Task)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationItem.hidesBackButton = true
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -29,23 +37,18 @@ class TasksViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return tasks.count
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("taskCell", forIndexPath: indexPath) as UITableViewCell
+        cell.textLabel?.text = tasks[indexPath.row].title
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
