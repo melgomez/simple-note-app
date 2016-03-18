@@ -94,5 +94,20 @@ class TasksViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "editTask" {
+            let editTaskView = segue.destinationViewController as! AddTaskViewController
+            
+            // Get the cell that generated this segue
+            
+            if let selectedTaskCell = sender as? UITableViewCell {
+                let indexPath = tableView.indexPathForCell(selectedTaskCell)!
+                let selectedTask = tasks[indexPath.row]
+                
+                editTaskView.task = selectedTask
+            }
+        }
+    }
 
 }
